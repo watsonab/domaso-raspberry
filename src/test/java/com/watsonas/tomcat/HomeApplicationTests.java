@@ -18,6 +18,8 @@ package com.watsonas.tomcat;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -42,6 +44,8 @@ import org.junit.Assert;
 @IntegrationTest("server.port:0")
 @DirtiesContext
 public class HomeApplicationTests {
+	
+	Logger Logger = LoggerFactory.getLogger( HomeApplicationTests.class );
 
 	@Value("${local.server.port}")
 	private int port;
@@ -51,7 +55,8 @@ public class HomeApplicationTests {
 		ResponseEntity<String> entity = new TestRestTemplate().getForEntity(
 				"http://localhost:" + this.port, String.class);
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
-		Assert.assertTrue(entity.getBody().contains("temperature"));
+		Logger.info( "Read [" +  entity.getBody() + "]");
+		Assert.assertTrue(entity.getBody().contains("body"));
 	}
 
 }

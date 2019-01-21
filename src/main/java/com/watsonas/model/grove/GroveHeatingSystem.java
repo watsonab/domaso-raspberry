@@ -1,11 +1,12 @@
 package com.watsonas.model.grove;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import org.iot.raspberry.grovepi.GrovePi;
 import org.iot.raspberry.grovepi.devices.GroveRelay;
 import org.iot.raspberry.grovepi.devices.GroveTemperatureAndHumiditySensor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
@@ -19,6 +20,8 @@ import com.watsonas.model.HeatingSystem;
 @Component
 @Profile("prod")
 public class GroveHeatingSystem extends AbstractHeatingSystem implements HeatingSystem {
+	
+	private final Logger logger = LoggerFactory.getLogger( GroveHeatingSystem.class );
 	
 	@Autowired
 	private GrovePi grovePi;

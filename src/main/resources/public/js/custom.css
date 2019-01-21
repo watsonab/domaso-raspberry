@@ -1,0 +1,59 @@
+body {
+  font: 14px "Century Gothic", Futura, sans-serif;
+  margin: 20px;
+}
+
+#root {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.homeDisplay {
+  background: #fff;
+  border: 1px solid #999;
+  margin-top: 0px;
+  max-width: 340px;
+  padding: 0;
+}
+
+.temperature {
+  background: #fff;
+  color: black;
+  font-weight: bold;
+  font-size: 180px;
+  font-family: "digital-clock-font";
+  margin-top: 0px;
+  padding: 25px;
+  text-align: center;
+}
+
+.rowState{display:flex; flex-direction:row;   justify-content: center;}
+
+.controlState {
+  background: lightgrey;
+  color: grey;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: "Century Gothic";
+  margin-top: 5px;
+  padding: 0;
+  text-align: center;
+  width: 50%;
+}
+
+.heatingState {
+  background: #fff;
+  color: grey;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: "Century Gothic";
+  margin-top: 5px;
+  padding: 0;
+  text-align: center;
+  width: 50%;
+}
+
+@font-face{
+ font-family:'digital-clock-font';
+ src: url('digital-7.ttf');
+}

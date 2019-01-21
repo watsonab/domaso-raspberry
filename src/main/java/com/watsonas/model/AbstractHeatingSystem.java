@@ -16,7 +16,7 @@ abstract public class AbstractHeatingSystem implements HeatingSystem {
 	protected boolean isHeatingSystemOn;
 	protected boolean isAutomatic;
 
-	protected final double hysterisisThreshold = 3;
+	protected final double hysterisisThreshold = 2;
 
 	public AbstractHeatingSystem() {
 		// check temp every minute
@@ -49,6 +49,7 @@ abstract public class AbstractHeatingSystem implements HeatingSystem {
 		} else {
 			executor.submit(new AutomaticTemperatureTask());
 		}
+		logger.info("Set automatic control to " + ( onOrOff ? "on" : "off" ) );
 	}
 
 	public class AutomaticTemperatureTask implements Runnable {
@@ -58,7 +59,7 @@ abstract public class AbstractHeatingSystem implements HeatingSystem {
 				return;
 			double roomTemperature = getTemperature();
 			if (isHeatingSystemOn) {
-				if (roomTemperature > getTargetTemperature()) {
+				if (roomTemperature >= getTargetTemperature()) {
 					logger.info("Room temperature is up to " + roomTemperature + ", target is " + getTargetTemperature()
 							+ " so turning the heating off");
 					turnDevice(false);

@@ -16,6 +16,8 @@
 
 package com.watsonas.tomcat.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +34,8 @@ import com.watsonas.model.HeatingSystem;
 @Controller
 public class HomeController {
 
+	private final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
 	@Autowired
 	private Home home;
 
@@ -40,7 +44,7 @@ public class HomeController {
 	@ResponseBody
 	public String currentLivingRoomTemperature() {
 		HeatingSystem heatingSystem = home.getHeatingSystem();
-		return "" + heatingSystem.getTemperature() + " degrees";
+		return "" + heatingSystem.getTemperature();
 	}
 
 	// http://localhost:8081/getById/95?id2=55
@@ -69,15 +73,16 @@ public class HomeController {
 	@RequestMapping(value = "/setHeatingSystemControl/{requiredState}", method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity<String> setHeatingSystemState(@PathVariable String requiredState) {
 		HeatingSystem heatingSystem = home.getHeatingSystem();
+		
+		logger.info("Received call to /setHeatingSystemControl/" + requiredState );
 
 		switch (requiredState) {
 		case "auto":
-			if (!heatingSystem.isDeviceOn()) {
-				heatingSystem.setAutomatic(true);
-			}
+			heatingSystem.setAutomatic(true);
 			return new ResponseEntity<String>("auto", HttpStatus.OK);
 
 		case "off":
+			heatingSystem.setAutomatic(false);
 			if (heatingSystem.isDeviceOn()) {
 				heatingSystem.setAutomatic(false);
 			}

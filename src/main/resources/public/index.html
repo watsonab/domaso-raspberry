@@ -1,14 +1,12 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>Domaso Surfview</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="js/custom.css" rel="stylesheet">
 </head>
 <body>
-    <p>Room <a href="/livingRoomTemperature/">temperature</a></p>
-    <p>Set heating system <a href="/setHeatingSystemControl/auto">automatic</a></p>
-    <p>Set heating system <a href="/setHeatingSystemControl/off">off</a></p>
-    <p>Control <a href="/heatingSystemControl/">state</a></p>
-    <p>Heating system <a href="/heatingSystemState/">state</a></p>
+    <div id="homeDisplay"></div>
+    <script src="built/bundle.js"></script>
 </body>
 </html>
