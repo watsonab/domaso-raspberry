@@ -5,6 +5,5 @@ Raspberry Pi project to remotely control a holiday home
 - Embedded Tomcat
 - REST web service interface
 - Raspberry PI control of heating system via temperature sensor + relay to turn heating system on or off
-- Test code
-- Basic thin client UI
+- ReactJS thin client UI
 - Docker file ( web server runs under Docker on the PI )
