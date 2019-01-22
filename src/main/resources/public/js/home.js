@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import NumericLabel from 'react-pretty-numbers';
 
 class TemperatureDisplay extends React.Component {
     constructor(){
@@ -34,7 +33,7 @@ class ControlStateDisplay extends React.Component {
     constructor(){
         super();
         this.state = {
-        		controlState: 'off',
+        		controlState: '',
         		color: 'white'};
         // This binding is necessary to make `this` work in the callback FFS!!
         this.toggleControl = this.toggleControl.bind(this);
