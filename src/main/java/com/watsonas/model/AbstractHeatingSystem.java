@@ -25,6 +25,7 @@ abstract public class AbstractHeatingSystem implements HeatingSystem {
 
 	@Override
 	abstract public double getTemperature();
+
 	@Override
 	abstract public double getTargetTemperature();
 
@@ -49,7 +50,7 @@ abstract public class AbstractHeatingSystem implements HeatingSystem {
 		} else {
 			executor.submit(new AutomaticTemperatureTask());
 		}
-		logger.info("Set automatic control to " + ( onOrOff ? "on" : "off" ) );
+		logger.info("Set automatic control to " + (onOrOff ? "on" : "off"));
 	}
 
 	public class AutomaticTemperatureTask implements Runnable {
@@ -57,19 +58,23 @@ abstract public class AbstractHeatingSystem implements HeatingSystem {
 		public void run() {
 			if (!isAutomatic)
 				return;
-			double roomTemperature = getTemperature();
-			if (isHeatingSystemOn) {
-				if (roomTemperature >= getTargetTemperature()) {
-					logger.info("Room temperature is up to " + roomTemperature + ", target is " + getTargetTemperature()
-							+ " so turning the heating off");
-					turnDevice(false);
+			try {
+				double roomTemperature = getTemperature();
+				if (isHeatingSystemOn) {
+					if (roomTemperature >= getTargetTemperature()) {
+						logger.info("Room temperature is up to " + roomTemperature + ", target is "
+								+ getTargetTemperature() + " so turning the heating off");
+						turnDevice(false);
+					}
+				} else {
+					if (roomTemperature < getTargetTemperature() - hysterisisThreshold) {
+						logger.info("Room temperature is down to " + roomTemperature + ", target is "
+								+ getTargetTemperature() + " so turning the heating on");
+						turnDevice(true);
+					}
 				}
-			} else {
-				if (roomTemperature < getTargetTemperature() - hysterisisThreshold) {
-					logger.info("Room temperature is down to " + roomTemperature + ", target is " + getTargetTemperature()
-							+ " so turning the heating on");
-					turnDevice(true);
-				}
+			} catch (Throwable t) {
+				logger.error("Failed to get temperature", t);
 			}
 		}
 	}

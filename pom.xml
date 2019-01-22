@@ -16,8 +16,8 @@
 	<version>1.0T</version>
 	<url>http://projects.spring.io/spring-boot/</url>
 	<organization>
-		<name>Watsonas Software, Inc.</name>
-		<url>http://www.watsonas.com</url>
+		<name>Domaso Surfview</name>
+		<url>https://domasosurfview.home.blog/2018/07/29/domaso-holiday-home</url>
 	</organization>
 	<properties>
 		<main.basedir>${basedir}/../..</main.basedir>

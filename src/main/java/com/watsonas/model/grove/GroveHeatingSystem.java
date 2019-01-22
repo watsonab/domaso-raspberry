@@ -72,7 +72,7 @@ public class GroveHeatingSystem extends AbstractHeatingSystem implements Heating
 		} catch (Exception io) {
 			throw new RuntimeException(io);
 		}
-		return -1;
+		throw new RuntimeException( "Failed to get temperature");
 	}
 	
 
