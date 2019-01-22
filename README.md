@@ -6,3 +6,5 @@ Raspberry Pi project to remotely control a holiday home
 - Raspberry PI control of heating system via temperature sensor + relay to turn heating system on or off
 - ReactJS thin client UI
 - Docker file ( web server runs under Docker on the PI )
+
+<img src="docs/screenshot.png">
