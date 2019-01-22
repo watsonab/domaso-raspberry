@@ -47,13 +47,7 @@ public class HomeController {
 		return "" + heatingSystem.getTemperature();
 	}
 
-	// http://localhost:8081/getById/95?id2=55
-	@RequestMapping(value = "/getById/{id}", method = RequestMethod.GET)
-	public @ResponseBody ResponseEntity<String> getById(@PathVariable String id, @RequestParam("id2") String id2) {
-		return new ResponseEntity<String>("GET Response : " + id + " " + id2, HttpStatus.OK);
-	}
-
-	// http://localhost:8081/heatingDeviceState
+	// http://localhost:8081/heatingSystemState
 	@RequestMapping("/heatingSystemState")
 	@ResponseBody
 	public String heatingDeviceState() {
