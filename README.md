@@ -1,5 +1,5 @@
 # domaso-raspberry
-Raspberry Pi project to remotely control a holiday home
+Raspberry Pi project to remotely control a holiday home, intially the Italian Perry heating system
 
 - Spring boot web server with embedded Tomcat
 - REST web service interface, with web service security
