@@ -3,6 +3,7 @@ Raspberry Pi project to remotely control a holiday home, intially the Italian Pe
 
 - Raspberry Pi web server based control of heating system 
 - Grove temperature sensor + relay to turn heating system on or off
+- Raspberry Pi web camera
 - Spring boot with embedded Tomcat
 - Rest web services, with role based web service security
 - Docker - web server runs under Docker on the PI, Dockerfile included
