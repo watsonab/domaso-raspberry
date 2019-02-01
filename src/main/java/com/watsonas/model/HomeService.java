@@ -10,12 +10,16 @@ public class HomeService implements Home {
 
 	@Autowired
 	private HeatingSystem heatingDevice;
-	
-	public HomeService() {
-	}
+
+	@Autowired
+	private Camera camera;
 	
 	public HeatingSystem getHeatingSystem() {
 		return heatingDevice;
 	};
-	
+
+	public Camera getCamera() {
+		return camera;
+	};
+
 }

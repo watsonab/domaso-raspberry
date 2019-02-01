@@ -16,12 +16,28 @@
 
 package com.watsonas.tomcat.web;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.format.datetime.DateFormatter;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,6 +45,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.watsonas.home.Home;
+import com.watsonas.model.Camera;
 import com.watsonas.model.HeatingSystem;
 
 @Controller
@@ -63,6 +80,16 @@ public class HomeController {
 		return heatingSystem.isAutomatic() ? "auto" : "off";
 	}
 
+   @RequestMapping(value = "/camera", method = RequestMethod.GET,
+            produces = MediaType.IMAGE_JPEG_VALUE)
+	    public void getImage(HttpServletResponse response) throws IOException {
+			File image = home.getCamera().takePicture("webcam" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYYMMDDHHmmSS") ) + ".jpg" );
+			logger.info("Pic saved at" + image.getAbsolutePath().toString() );
+	        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+	        StreamUtils.copy(new FileInputStream(image), response.getOutputStream());
+	    }
+
+	
 	// http://localhost:8081/setHeatingSystemControl/on
 	@RequestMapping(value = "/setHeatingSystemControl/{requiredState}", method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity<String> setHeatingSystemState(@PathVariable String requiredState) {

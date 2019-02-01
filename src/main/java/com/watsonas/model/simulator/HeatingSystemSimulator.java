@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import com.watsonas.model.AbstractHeatingSystem;
 import com.watsonas.model.HeatingSystem;
-import com.watsonas.model.grove.GroveHeatingSystem;
 
 @Component
 @Profile("dev")

@@ -29,6 +29,31 @@ class TemperatureDisplay extends React.Component {
     }
 }
 
+class WebcamDisplay extends React.Component {
+    constructor(){
+        super();
+        this.state = {fileUrl: ''};
+    }
+	
+    componentDidMount() {
+    	fetch( '/camera/')
+    	.then(res => res.blob())
+   		.then(blob => {
+   			  this.setState(
+   					  (state) =>
+   					  ({ 
+   						  fileUrl: (window.URL || window.webkitURL).createObjectURL(blob)
+   					  }))
+		});
+    }
+        
+    render() {
+        return(
+              <div><img src={this.state.fileUrl}/></div>
+        );
+    }
+}
+
 class ControlStateDisplay extends React.Component {
     constructor(){
         super();
@@ -125,7 +150,7 @@ class HomeDisplay extends React.Component {
 
 	render() {
 		return (
-				<div className="homeDisplay" >
+			<div className="homeDisplay" >
 				<p><TemperatureDisplay /></p>
 				<p> </p>
 				<div className="rowState">
